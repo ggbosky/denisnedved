@@ -46,11 +46,13 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 
 /* HERO */
 .hero{padding:96px 0 80px}
-.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.hero .wrap{display:block;text-align:center}
+.hero .lead{margin-left:auto;margin-right:auto}
+.hero .cta,.hero .chips{justify-content:center}
 .pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);background:var(--card);padding:6px 12px;border-radius:999px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-h1{font-size:clamp(38px,6vw,62px);line-height:1.05;font-weight:800;letter-spacing:-.03em;margin:22px 0 18px}
+h1{font-size:clamp(38px,6vw,62px);line-height:1.05;font-weight:800;letter-spacing:-.03em;margin:0 0 18px}
 .grad{background:linear-gradient(90deg,var(--accent),#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
 .typed{font-family:var(--mono);color:var(--accent);font-size:clamp(15px,2vw,18px);min-height:28px}
 .typed::after{content:"▋";animation:blink 1s steps(1) infinite;margin-left:2px}
@@ -192,7 +194,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <header class="hero" id="home">
   <div class="wrap">
     <div class="reveal">
-      <span class="pill"><span class="dot"></span>Otevřen stážím, brigádám a freelance</span>
       <h1>Python & C<br><span class="grad">Developer</span></h1>
       <div class="typed" id="typed"></div>
       <p class="lead">Student softwarového inženýrství na SŠ DELTA Pardubice a člen Mensy ČR. Baví mě řešit problémy, rozumět technologiím do hloubky a přetvářet nápady ve fungující projekty.</p>
@@ -206,38 +207,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="chips">
         <span class="chip">Python</span><span class="chip">C</span><span class="chip">C#</span><span class="chip">Git</span><span class="chip">Linux</span><span class="chip">Web</span>
       </div>
-      <div class="meta"><span>📍 Choceň, Pardubický kraj</span><span>🕐 CET · UTC+1</span></div>
-    </div>
-
-    <div class="term reveal">
-      <div class="term-top"><i style="background:#ef4444"></i><i style="background:#eab308"></i><i style="background:#22c55e"></i><span>~/denis/about.c</span></div>
-<pre><span class="c">// whoami</span>
-<span class="k">#include</span> <span class="s">&lt;stdio.h&gt;</span>
-
-<span class="k">typedef struct</span> {
-    <span class="k">const char</span> *name;
-    <span class="k">const char</span> *school;
-    <span class="k">const char</span> *stack[<span class="n">3</span>];
-    <span class="k">int</span> mensa_since;
-} Dev;
-
-<span class="k">int</span> <span class="f">main</span>(<span class="k">void</span>) {
-    Dev me = {
-        <span class="s">"Denis Nedvěd"</span>,
-        <span class="s">"SŠ DELTA Pardubice"</span>,
-        { <span class="s">"C"</span>, <span class="s">"Python"</span>, <span class="s">"C#"</span> },
-        <span class="n">2025</span>
-    };
-    <span class="f">printf</span>(<span class="s">"Hello, %s!\n"</span>, me.name);
-    <span class="k">return</span> <span class="n">0</span>;
-}</pre>
     </div>
   </div>
 </header>
 
 <section id="about">
   <div class="wrap">
-    <div class="eyebrow">// 01 · o mně</div>
     <h2>Kód, který rozumí hardwaru</h2>
     <p class="sub">Zajímá mě, co se děje pod kapotou – od správy paměti v C až po backend v Pythonu.</p>
 
@@ -289,7 +264,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <section id="devlog">
   <div class="wrap">
-    <div class="eyebrow">// 02 · dev log</div>
     <h2>Na čem aktuálně pracuji</h2>
     <p class="sub">Tři směry, kterým se právě věnuji – s průběžným stavem.</p>
 
@@ -335,7 +309,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <section id="skills">
   <div class="wrap">
-    <div class="eyebrow">// 03 · toolkit</div>
     <h2>Technické dovednosti</h2>
     <p class="sub">Nástroje a oblasti, se kterými denně pracuji.</p>
 
@@ -366,7 +339,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <section id="process">
   <div class="wrap">
-    <div class="eyebrow">// 04 · jak pracuji</div>
     <h2>Od nápadu k fungujícímu projektu</h2>
     <p class="sub">Každý projekt prochází stejnými kroky – jako když program prochází kompilací.</p>
 
@@ -390,7 +362,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="contact">
   <div class="wrap">
     <div class="contact-box reveal">
-      <div class="eyebrow">// 05 · kontakt</div>
       <h2>Máte zajímavý projekt?</h2>
       <p class="sub">Jsem otevřen juniorním stážím a brigádám v IT (C nebo Python), freelance zakázkám a spolupráci na zajímavých projektech.</p>
       <div class="contacts">
