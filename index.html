@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Denis Nedvěd · Python & C Developer</title>
+<meta name="description" content="Denis Nedvěd – student softwarového inženýrství na SŠ DELTA Pardubice. Python, C, systémové programování a backend.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230b1220'/><text x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%2338bdf8' text-anchor='middle'>DN</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b14; --bg2:#0b1220; --card:#0f172a; --card2:#111c33;
+  --line:#1e293b; --text:#e2e8f0; --muted:#94a3b8; --dim:#64748b;
+  --accent:#38bdf8; --accent2:#0a66c2; --green:#22c55e; --yellow:#facc15; --violet:#a78bfa;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(600px 400px at 85% -5%,rgba(10,102,194,.28),transparent 70%),
+    radial-gradient(500px 400px at 0% 30%,rgba(56,189,248,.10),transparent 70%),
+    linear-gradient(rgba(148,163,184,.04) 1px,transparent 1px) 0 0/40px 40px,
+    linear-gradient(90deg,rgba(148,163,184,.04) 1px,transparent 1px) 0 0/40px 40px;}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(7,11,20,.72);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-weight:700;color:var(--accent);background:var(--card);border:1px solid var(--line)}
+.logo b{display:block;font-size:15px;line-height:1.2}
+.logo small{display:block;font-size:11px;color:var(--muted);font-family:var(--mono)}
+.links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+.links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;font-weight:600;font-size:14px;transition:.2s;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 24px rgba(56,189,248,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(56,189,248,.35)}
+.btn-ghost{border-color:var(--line);background:var(--card);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;width:40px;height:40px;font-size:18px;cursor:pointer}
+
+/* HERO */
+.hero{padding:96px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);background:var(--card);padding:6px 12px;border-radius:999px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+h1{font-size:clamp(38px,6vw,62px);line-height:1.05;font-weight:800;letter-spacing:-.03em;margin:22px 0 18px}
+.grad{background:linear-gradient(90deg,var(--accent),#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.typed{font-family:var(--mono);color:var(--accent);font-size:clamp(15px,2vw,18px);min-height:28px}
+.typed::after{content:"▋";animation:blink 1s steps(1) infinite;margin-left:2px}
+@keyframes blink{50%{opacity:0}}
+.lead{color:var(--muted);font-size:17px;max-width:560px;margin:18px 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.chip{font-family:var(--mono);font-size:12px;padding:5px 11px;border-radius:7px;background:rgba(56,189,248,.08);color:#bae6fd;border:1px solid rgba(56,189,248,.2)}
+.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--dim);font-family:var(--mono)}
+
+/* Terminal */
+.term{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.term-top{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--bg2)}
+.term-top i{width:11px;height:11px;border-radius:50%;display:block}
+.term-top span{margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--dim)}
+.term pre{font-family:var(--mono);font-size:13px;padding:18px 20px;line-height:1.75;color:#cbd5e1;white-space:pre-wrap}
+.k{color:#c084fc}.s{color:#86efac}.c{color:var(--dim)}.f{color:var(--accent)}.n{color:#fdba74}
+
+/* Sections */
+section{padding:84px 0}
+.eyebrow{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:10px}
+h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
+.sub{color:var(--muted);max-width:620px;margin-bottom:44px}
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:16px;padding:26px;transition:.25s}
+.card:hover{border-color:rgba(56,189,248,.4);transform:translateY(-3px)}
+
+/* About */
+.about{display:grid;grid-template-columns:340px 1fr;gap:40px;align-items:start}
+.profile{text-align:center;position:sticky;top:96px}
+.avatar{width:170px;height:170px;margin:0 auto 18px;border-radius:50%;padding:4px;background:conic-gradient(from 180deg,var(--accent),var(--accent2),#818cf8,var(--accent))}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--card);display:block}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--green);background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);padding:4px 11px;border-radius:999px}
+.profile h3{font-size:22px;margin:12px 0 2px}
+.profile p{color:var(--muted);font-size:14px}
+.kv{margin-top:20px;text-align:left;border-top:1px solid var(--line)}
+.kv div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.kv dt{color:var(--dim);font-family:var(--mono)}
+.kv dd{text-align:right;font-weight:500}
+.about-text p{color:var(--muted);margin-bottom:16px;font-size:16px}
+.about-text p strong{color:var(--text)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.two h4{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.list{list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--muted);font-size:14px;margin-bottom:9px}
+.list li::before{content:"›";position:absolute;left:4px;color:var(--accent);font-weight:700}
+
+/* Dev log */
+.devlog{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.icon{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:15px}
+.ver{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.card h3{font-size:18px;margin-bottom:8px}
+.card > p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.steps{list-style:none;border-top:1px dashed var(--line);padding-top:14px}
+.steps li{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;padding:6px 0;color:#cbd5e1}
+.st{font-family:var(--mono);font-size:10.5px;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.done{background:rgba(34,197,94,.12);color:#4ade80}
+.prog{background:rgba(250,204,21,.12);color:#fde047}
+.next{background:rgba(148,163,184,.12);color:var(--muted)}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.skills .card h3{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{font-family:var(--mono);font-size:12px;padding:5px 11px;border-radius:7px;background:var(--card2);border:1px solid var(--line);color:#cbd5e1}
+
+/* Process */
+.process{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;counter-reset:s}
+.step{position:relative}
+.step .num{font-family:var(--mono);font-size:32px;font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(56,189,248,.55);line-height:1;margin-bottom:12px}
+.step h3{font-size:16px}
+.step p{font-size:13.5px;color:var(--muted)}
+.step .lbl{display:inline-block;margin-bottom:10px;font-family:var(--mono);font-size:10.5px;color:var(--violet);background:rgba(167,139,250,.1);padding:2px 8px;border-radius:6px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
+.stat{text-align:center;padding:26px 16px}
+.stat b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* Contact */
+.contact-box{text-align:center;padding:56px 28px;border-radius:22px;border:1px solid var(--line);background:
+  radial-gradient(500px 220px at 50% 0%,rgba(10,102,194,.3),transparent 70%),var(--card)}
+.contact-box .sub{margin:0 auto 32px}
+.contacts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:820px;margin:0 auto}
+.ccard{display:flex;align-items:center;gap:14px;text-align:left;padding:18px}
+.ccard .icon{flex:none}
+.ccard small{display:block;color:var(--dim);font-size:12px;font-family:var(--mono)}
+.ccard b{font-size:14px;word-break:break-word}
+
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--dim);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* Responsive */
+@media (max-width:980px){
+  .hero .wrap,.about{grid-template-columns:1fr}
+  .profile{position:static;max-width:420px;margin:0 auto;width:100%}
+  .devlog{grid-template-columns:1fr 1fr}
+  .process{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .contacts{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .links,.nav-cta{display:none}
+  .menu-btn{display:block}
+  .links.open{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(7,11,20,.97);padding:18px 20px;border-bottom:1px solid var(--line);gap:16px}
+  .hero{padding:56px 0}
+  section{padding:64px 0}
+  .devlog,.skills,.two,.process{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#home" class="logo">
+      <span class="logo-mark">DN</span>
+      <span><b>Denis Nedvěd</b><small>Python · C · Systems</small></span>
+    </a>
+    <div class="links" id="links">
+      <a href="#home">Domů</a>
+      <a href="#about">O mně</a>
+      <a href="#devlog">Projekty</a>
+      <a href="#skills">Dovednosti</a>
+      <a href="#process">Jak pracuji</a>
+      <a href="#contact">Kontakt</a>
+    </div>
+    <a href="#contact" class="btn btn-primary nav-cta">Spolupráce</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="pill"><span class="dot"></span>Otevřen stážím, brigádám a freelance</span>
+      <h1>Python & C<br><span class="grad">Developer</span></h1>
+      <div class="typed" id="typed"></div>
+      <p class="lead">Student softwarového inženýrství na SŠ DELTA Pardubice a člen Mensy ČR. Baví mě řešit problémy, rozumět technologiím do hloubky a přetvářet nápady ve fungující projekty.</p>
+      <div class="cta">
+        <a href="#devlog" class="btn btn-primary">Na čem pracuji →</a>
+        <a href="https://www.linkedin.com/in/denis-nedv%C4%9Bd-4330a2439/" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="chips">
+        <span class="chip">Python</span><span class="chip">C</span><span class="chip">C#</span><span class="chip">Git</span><span class="chip">Linux</span><span class="chip">Web</span>
+      </div>
+      <div class="meta"><span>📍 Choceň, Pardubický kraj</span><span>🕐 CET · UTC+1</span></div>
+    </div>
+
+    <div class="term reveal">
+      <div class="term-top"><i style="background:#ef4444"></i><i style="background:#eab308"></i><i style="background:#22c55e"></i><span>~/denis/about.c</span></div>
+<pre><span class="c">// whoami</span>
+<span class="k">#include</span> <span class="s">&lt;stdio.h&gt;</span>
+
+<span class="k">typedef struct</span> {
+    <span class="k">const char</span> *name;
+    <span class="k">const char</span> *school;
+    <span class="k">const char</span> *stack[<span class="n">3</span>];
+    <span class="k">int</span> mensa_since;
+} Dev;
+
+<span class="k">int</span> <span class="f">main</span>(<span class="k">void</span>) {
+    Dev me = {
+        <span class="s">"Denis Nedvěd"</span>,
+        <span class="s">"SŠ DELTA Pardubice"</span>,
+        { <span class="s">"C"</span>, <span class="s">"Python"</span>, <span class="s">"C#"</span> },
+        <span class="n">2025</span>
+    };
+    <span class="f">printf</span>(<span class="s">"Hello, %s!\n"</span>, me.name);
+    <span class="k">return</span> <span class="n">0</span>;
+}</pre>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">// 01 · o mně</div>
+    <h2>Kód, který rozumí hardwaru</h2>
+    <p class="sub">Zajímá mě, co se děje pod kapotou – od správy paměti v C až po backend v Pythonu.</p>
+
+    <div class="about">
+      <div class="card profile reveal">
+        <div class="avatar"><img src="profile.jpg" alt="Denis Nedvěd"></div>
+        <span class="badge"><span class="dot"></span>Dostupný</span>
+        <h3>Denis Nedvěd</h3>
+        <p>Software Engineering Student</p>
+        <dl class="kv">
+          <div><dt>Hlavní jazyk</dt><dd>C / Python</dd></div>
+          <div><dt>Vedlejší</dt><dd>C# (hry)</dd></div>
+          <div><dt>Škola</dt><dd>SŠ DELTA Pardubice</dd></div>
+          <div><dt>Mensa ČR</dt><dd>od 04/2025</dd></div>
+          <div><dt>Lokalita</dt><dd>Choceň, CZ</dd></div>
+          <div><dt>Jazyky</dt><dd>Čeština · English</dd></div>
+        </dl>
+      </div>
+
+      <div class="about-text reveal">
+        <p>Jsem <strong>student softwarového inženýrství</strong> na SŠ DELTA – Střední škola informatiky a ekonomie v Pardubicích a <strong>člen Mensy ČR</strong> (od 04/2025).</p>
+        <p>Nejvíc mě táhne <strong>systémové programování</strong>: parsování logů, práce se soubory a ruční správa paměti v C. Míří to k nízkoúrovňovému a embedded vývoji – a vždy s důrazem na čitelný kód.</p>
+        <p>Vedle toho vyvíjím <strong>hry v C#</strong> zaměřené na logiku a herní mechaniky a stavím <strong>webové stránky</strong> pro procvičování matiky a programování pro základní školy.</p>
+
+        <div class="two">
+          <div class="card">
+            <h4>🛠️ Co stavím</h4>
+            <ul class="list">
+              <li>Nástroje v C pro parsování logů a práci se soubory</li>
+              <li>Backend a skripty v Pythonu</li>
+              <li>Logické hry a herní mechaniky v C#</li>
+              <li>Výukové weby pro základní školy</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>🧠 Jak k tomu přistupuji</h4>
+            <ul class="list">
+              <li>Nejdřív pochopit problém, pak psát kód</li>
+              <li>Rozumět technologii do hloubky</li>
+              <li>Čitelný a udržovatelný kód</li>
+              <li>Verzování přes Git / GitHub</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="devlog">
+  <div class="wrap">
+    <div class="eyebrow">// 02 · dev log</div>
+    <h2>Na čem aktuálně pracuji</h2>
+    <p class="sub">Tři směry, kterým se právě věnuji – s průběžným stavem.</p>
+
+    <div class="devlog">
+      <article class="card reveal">
+        <div class="proj-top"><span class="icon" style="background:rgba(56,189,248,.12);color:var(--accent)">C</span><span class="ver">build 0.4.x</span></div>
+        <h3>C & systémové programování</h3>
+        <p>Praktické projekty zaměřené na nízkoúrovňový a embedded vývoj a čitelný kód.</p>
+        <ul class="steps">
+          <li>Práce se soubory <span class="st done">Hotovo</span></li>
+          <li>Parsování logů <span class="st done">Hotovo</span></li>
+          <li>Správa paměti <span class="st prog">Probíhá</span></li>
+          <li>Embedded vývoj <span class="st next">Další</span></li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <div class="proj-top"><span class="icon" style="background:rgba(167,139,250,.12);color:var(--violet)">C#</span><span class="ver">build 0.3.x</span></div>
+        <h3>Vývoj her v C#</h3>
+        <p>Vlastní projekty zaměřené na logiku a herní mechaniky, verzované přes Git a GitHub.</p>
+        <ul class="steps">
+          <li>Herní logika <span class="st done">Hotovo</span></li>
+          <li>Git workflow <span class="st done">Hotovo</span></li>
+          <li>Herní mechaniky <span class="st prog">Probíhá</span></li>
+          <li>Ladění a polish <span class="st next">Další</span></li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <div class="proj-top"><span class="icon" style="background:rgba(34,197,94,.12);color:var(--green)">&lt;/&gt;</span><span class="ver">build 0.2.x</span></div>
+        <h3>Výukový web pro ZŠ</h3>
+        <p>Nové webové stránky na procvičení matiky a programování pro žáky základních škol.</p>
+        <ul class="steps">
+          <li>Návrh obsahu <span class="st done">Hotovo</span></li>
+          <li>Cvičení z matiky <span class="st prog">Probíhá</span></li>
+          <li>Úlohy z programování <span class="st prog">Probíhá</span></li>
+          <li>Spuštění <span class="st next">Další</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">// 03 · toolkit</div>
+    <h2>Technické dovednosti</h2>
+    <p class="sub">Nástroje a oblasti, se kterými denně pracuji.</p>
+
+    <div class="skills">
+      <div class="card reveal">
+        <h3>⚙️ Jazyky</h3>
+        <p>Hlavní důraz na C a Python, C# pro hry.</p>
+        <div class="tags"><span class="tag">C</span><span class="tag">Python</span><span class="tag">C#</span><span class="tag">HTML / CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <div class="card reveal">
+        <h3>🧩 Systémové programování</h3>
+        <p>Jak software opravdu pracuje s pamětí a soubory.</p>
+        <div class="tags"><span class="tag">Správa paměti</span><span class="tag">Pointery</span><span class="tag">File I/O</span><span class="tag">Parsování logů</span><span class="tag">Embedded</span></div>
+      </div>
+      <div class="card reveal">
+        <h3>🗄️ Backend</h3>
+        <p>Logika na straně serveru a automatizace v Pythonu.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Skriptování</span><span class="tag">Automatizace</span><span class="tag">Datové struktury</span></div>
+      </div>
+      <div class="card reveal">
+        <h3>🔧 Nástroje</h3>
+        <p>Verzování a vývojové prostředí.</p>
+        <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Linux</span><span class="tag">VS Code</span><span class="tag">Visual Studio</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="eyebrow">// 04 · jak pracuji</div>
+    <h2>Od nápadu k fungujícímu projektu</h2>
+    <p class="sub">Každý projekt prochází stejnými kroky – jako když program prochází kompilací.</p>
+
+    <div class="process">
+      <div class="card step reveal"><div class="num">01</div><span class="lbl">analyze</span><h3>Pochopit</h3><p>Rozebrat problém a ujasnit si, co má výsledek dělat.</p></div>
+      <div class="card step reveal"><div class="num">02</div><span class="lbl">design</span><h3>Navrhnout</h3><p>Zvolit datové struktury, architekturu a nástroje.</p></div>
+      <div class="card step reveal"><div class="num">03</div><span class="lbl">compile</span><h3>Postavit</h3><p>Psát čitelný kód a průběžně commitovat do Gitu.</p></div>
+      <div class="card step reveal"><div class="num">04</div><span class="lbl">debug</span><h3>Otestovat</h3><p>Hledat chyby, úniky paměti a hraniční případy.</p></div>
+      <div class="card step reveal"><div class="num">05</div><span class="lbl">ship</span><h3>Dokončit</h3><p>Zdokumentovat, vylepšit a naučit se něco nového.</p></div>
+    </div>
+
+    <div class="stats">
+      <div class="card stat reveal"><b class="grad">3</b><span>programovací jazyky</span></div>
+      <div class="card stat reveal"><b class="grad">2025</b><span>člen Mensy ČR</span></div>
+      <div class="card stat reveal"><b class="grad">UTC+1</b><span>Česko · remote friendly</span></div>
+      <div class="card stat reveal"><b class="grad">247+</b><span>spojení na LinkedIn</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="eyebrow">// 05 · kontakt</div>
+      <h2>Máte zajímavý projekt?</h2>
+      <p class="sub">Jsem otevřen juniorním stážím a brigádám v IT (C nebo Python), freelance zakázkám a spolupráci na zajímavých projektech.</p>
+      <div class="contacts">
+        <a class="card ccard" href="https://www.linkedin.com/in/denis-nedv%C4%9Bd-4330a2439/" target="_blank" rel="noopener">
+          <span class="icon" style="background:rgba(10,102,194,.2);color:#60a5fa">in</span>
+          <span><small>LinkedIn</small><b>Denis Nedvěd</b></span>
+        </a>
+        <a class="card ccard" href="https://www.linkedin.com/in/denis-nedv%C4%9Bd-4330a2439/" target="_blank" rel="noopener">
+          <span class="icon" style="background:rgba(56,189,248,.12);color:var(--accent)">@</span>
+          <span><small>Zpráva</small><b>Napište mi přes LinkedIn</b></span>
+        </a>
+        <div class="card ccard">
+          <span class="icon" style="background:rgba(34,197,94,.12);color:var(--green)">📍</span>
+          <span><small>Lokalita</small><b>Choceň · Pardubice · remote</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Denis Nedvěd</span>
+    <span class="mono">Python · C · Systems Programming</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// mobile menu
+const links = document.getElementById('links');
+document.getElementById('menuBtn').onclick = () => links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a => a.onclick = () => links.classList.remove('open'));
+
+// typing effect
+const words = ['Systems Programming', 'Backend Development', 'Embedded & low-level', 'Game Dev v C#'];
+const el = document.getElementById('typed');
+let w = 0, i = 0, del = false;
+(function tick(){
+  const word = words[w];
+  el.textContent = '> ' + word.slice(0, i);
+  if (!del && i < word.length) i++;
+  else if (del && i > 0) i--;
+  else if (!del) { del = true; return setTimeout(tick, 1600); }
+  else { del = false; w = (w + 1) % words.length; }
+  setTimeout(tick, del ? 40 : 75);
+})();
+
+// reveal on scroll
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(n => io.observe(n));
+</script>
+</body>
+</html>
