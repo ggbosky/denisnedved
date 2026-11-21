@@ -124,7 +124,7 @@ h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;line-height:1.15;margin-
 /* Process */
 .process{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;counter-reset:s}
 .step{position:relative}
-.step .num{font-family:var(--mono);font-size:32px;font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(56,189,248,.55);line-height:1;margin-bottom:12px}
+.step .num{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:12px;background:linear-gradient(90deg,var(--accent),#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
 .step h3{font-size:16px}
 .step p{font-size:13.5px;color:var(--muted)}
 .step .lbl{display:inline-block;margin-bottom:10px;font-family:var(--mono);font-size:10.5px;color:var(--violet);background:rgba(167,139,250,.1);padding:2px 8px;border-radius:6px}
@@ -170,6 +170,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   section{padding:64px 0}
   .devlog,.skills,.two,.process{grid-template-columns:1fr}
 }
+.emo{width:1.15em;height:1.15em;vertical-align:-.2em;display:inline-block}
 </style>
 </head>
 <body>
@@ -241,7 +242,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
         <div class="two">
           <div class="card">
-            <h4>🛠️ Co stavím</h4>
+            <h4><img class="emo" src="emoji/1f6e0-fe0f.png" alt="🛠️"> Co stavím</h4>
             <ul class="list">
               <li>Nástroje v C pro parsování logů a práci se soubory</li>
               <li>Backend a skripty v Pythonu</li>
@@ -250,7 +251,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
             </ul>
           </div>
           <div class="card">
-            <h4>🧠 Jak k tomu přistupuji</h4>
+            <h4><img class="emo" src="emoji/1f9e0.png" alt="🧠"> Jak k tomu přistupuji</h4>
             <ul class="list">
               <li>Nejdřív pochopit problém, pak psát kód</li>
               <li>Rozumět technologii do hloubky</li>
@@ -271,7 +272,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
     <div class="devlog">
       <article class="card reveal">
-        <div class="proj-top"><span class="icon" style="background:rgba(56,189,248,.12);color:var(--accent)">C</span><span class="ver">build 0.4.x</span></div>
+        <div class="proj-top"><span class="icon" style="background:rgba(56,189,248,.12);color:var(--accent)">C</span></div>
         <h3>C & systémové programování</h3>
         <p>Praktické projekty zaměřené na nízkoúrovňový a embedded vývoj a čitelný kód.</p>
         <ul class="steps">
@@ -283,7 +284,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </article>
 
       <article class="card reveal">
-        <div class="proj-top"><span class="icon" style="background:rgba(167,139,250,.12);color:var(--violet)">C#</span><span class="ver">build 0.3.x</span></div>
+        <div class="proj-top"><span class="icon" style="background:rgba(167,139,250,.12);color:var(--violet)">C#</span></div>
         <h3>Vývoj her v C#</h3>
         <p>Vlastní projekty zaměřené na logiku a herní mechaniky, verzované přes Git a GitHub.</p>
         <ul class="steps">
@@ -295,7 +296,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </article>
 
       <article class="card reveal">
-        <div class="proj-top"><span class="icon" style="background:rgba(34,197,94,.12);color:var(--green)">&lt;/&gt;</span><span class="ver">build 0.2.x</span></div>
+        <div class="proj-top"><span class="icon" style="background:rgba(34,197,94,.12);color:var(--green)">&lt;/&gt;</span></div>
         <h3>Výukový web pro ZŠ</h3>
         <p>Nové webové stránky na procvičení matiky a programování pro žáky základních škol.</p>
         <ul class="steps">
@@ -316,22 +317,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
     <div class="skills">
       <div class="card reveal">
-        <h3>⚙️ Jazyky</h3>
+        <h3><img class="emo" src="emoji/2699-fe0f.png" alt="⚙️"> Jazyky</h3>
         <p>Hlavní důraz na C a Python, C# pro hry.</p>
         <div class="tags"><span class="tag">C</span><span class="tag">Python</span><span class="tag">C#</span><span class="tag">HTML / CSS</span><span class="tag">JavaScript</span></div>
       </div>
       <div class="card reveal">
-        <h3>🧩 Systémové programování</h3>
+        <h3><img class="emo" src="emoji/1f9e9.png" alt="🧩"> Systémové programování</h3>
         <p>Jak software opravdu pracuje s pamětí a soubory.</p>
         <div class="tags"><span class="tag">Správa paměti</span><span class="tag">Pointery</span><span class="tag">File I/O</span><span class="tag">Parsování logů</span><span class="tag">Embedded</span></div>
       </div>
       <div class="card reveal">
-        <h3>🗄️ Backend</h3>
+        <h3><img class="emo" src="emoji/1f5c4-fe0f.png" alt="🗄️"> Backend</h3>
         <p>Logika na straně serveru a automatizace v Pythonu.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">Skriptování</span><span class="tag">Automatizace</span><span class="tag">Datové struktury</span></div>
       </div>
       <div class="card reveal">
-        <h3>🔧 Nástroje</h3>
+        <h3><img class="emo" src="emoji/1f527.png" alt="🔧"> Nástroje</h3>
         <p>Verzování a vývojové prostředí.</p>
         <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Linux</span><span class="tag">VS Code</span><span class="tag">Visual Studio</span></div>
       </div>
@@ -376,7 +377,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <span><small>Zpráva</small><b>Napište mi přes LinkedIn</b></span>
         </a>
         <div class="card ccard">
-          <span class="icon" style="background:rgba(34,197,94,.12);color:var(--green)">📍</span>
+          <span class="icon" style="background:rgba(34,197,94,.12);color:var(--green)"><img class="emo" src="emoji/1f4cd.png" alt="📍"></span>
           <span><small>Lokalita</small><b>Choceň · Pardubice · remote</b></span>
         </div>
       </div>
